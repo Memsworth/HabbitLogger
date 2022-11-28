@@ -11,7 +11,17 @@
             Console.WriteLine("Type 2 to Insert Record.");
             Console.WriteLine("Type 3 to Delete Record.");
             Console.WriteLine("Type 4 to Update Record.");
+            Console.WriteLine("---------------------------------------------");
         }
 
+
+        public static void CloseAppMessage() => Console.WriteLine("Thank you for using habbit. Have a nic day");
+
+        public static void ShowRecords(List<Habbit> records) => Console.WriteLine(string.Join(Environment.NewLine, records.Select(x => x.ToString()))); 
+
+        public static void InsertMessage(string habbit)
+        {
+            Console.WriteLine($"Habbit {habbit} inserted into DB");
+        }
     }
 }
