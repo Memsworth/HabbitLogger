@@ -28,6 +28,7 @@ namespace HabbitLogger
                     var dataRecord = item as DbDataRecord;
 
                     if (dataRecord is null) continue;
+
                     DateOnly.TryParse(dataRecord["date"].ToString(), out DateOnly date);
                     var record = new Habbit((int)System.Convert.ChangeType(dataRecord["id"], typeof(int)), (string)System.Convert.ChangeType(dataRecord["habbitname"], typeof(string)),
                         date, (int)System.Convert.ChangeType(dataRecord["repetition"], typeof(int)));
