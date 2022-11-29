@@ -14,17 +14,8 @@ namespace HabbitLogger // Note: actual namespace depends on the project name.
         {
 
             CreateDB();
-            // file can be created. Table needs to be created specifically
-
-            // added new new sql
-
-            // it is schema to create a table
-
-
             var database = new DatabaseConnection(LoadConnectionString);
             var data = new DataAccess(database);
-            var item = data.LoadHabbitRecords();
-
             var endApp = false;
 
             while (endApp != true)
@@ -42,7 +33,7 @@ namespace HabbitLogger // Note: actual namespace depends on the project name.
                         data.Insert(CreatePerson());
                         break;
                     case "3":
-
+                        data.Delete(GetId());
                         break;
                     case "4":
                         break;
@@ -52,25 +43,48 @@ namespace HabbitLogger // Note: actual namespace depends on the project name.
             }
         }
 
+        private static int GetId()
+        {
+            int input;
+            do
+            {
+                Console.Write("Enter the ID you want to delete: ");
+                int.TryParse(Console.ReadLine(), out input);
+            } while (input <= 0);
+
+            return input;
+        }
         private static Habbit CreatePerson()
+        {
+            var habbitName = GetHabbitName();
+
+            var repetition = GetRepetition();
+
+            return new Habbit(habbitName!, DateOnly.FromDateTime(DateTime.Now), repetition);
+        }
+
+        private static int GetRepetition()
+        {
+            int repetition;
+            do
+            {
+                Console.Write("Enter repetition: ");
+                repetition = int.Parse(Console.ReadLine() ?? throw new ArgumentNullException());
+            } while (repetition <= 0);
+
+            return repetition;
+        }
+
+        private static string GetHabbitName()
         {
             string habbitName;
             do
             {
                 Console.Write("Enter a habbit: ");
                 habbitName = Console.ReadLine() ?? throw new ArgumentNullException();
-
             } while (string.IsNullOrEmpty(habbitName));
 
-            int repetition;
-            do
-            {
-                Console.Write("Enter repetition: ");
-                repetition = int.Parse(Console.ReadLine() ?? throw new ArgumentNullException());
-
-            } while (repetition <= 0);
-
-            return new Habbit(habbitName!, DateOnly.FromDateTime(DateTime.Now), repetition);
+            return habbitName;
         }
 
         private static void CreateDB()

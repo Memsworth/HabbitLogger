@@ -15,7 +15,7 @@
         }
 
 
-        public static void CloseAppMessage() => Console.WriteLine("Thank you for using habbit. Have a nic day");
+        public static void CloseAppMessage() => Console.WriteLine("Thank you for using habbit. Have a nice day");
 
         public static void ShowRecords(List<Habbit> records) => Console.WriteLine(string.Join(Environment.NewLine, records.Select(x => x.ToString()))); 
 
